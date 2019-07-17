@@ -1,9 +1,14 @@
 package Root;
 
 import Root.Commands.Base;
+import Root.Commands.Stats;
+import Root.Events.BreedingEvents;
+import Root.Events.CatchingEvents;
+import Root.Events.KillingEvents;
 import Root.Manager.SQLManager;
-import akka.io.UdpConnected;
 import com.google.inject.Inject;
+import com.pixelmonmod.pixelmon.Pixelmon;
+import com.pixelmonmod.pixelmon.api.events.BreedEvent;
 import org.slf4j.Logger;
 import org.spongepowered.api.Game;
 import org.spongepowered.api.Sponge;
@@ -38,8 +43,8 @@ public class FrostMMO {
     @ConfigDir(sharedRoot = false)
     private Path path;
 
-    private static FrostMMO instace;
-    public static FrostMMO getInstance(){return instace;}
+    private static FrostMMO instance;
+    public static FrostMMO getInstance(){return instance;}
 
     public static PluginContainer pluginContainer;
 
@@ -53,27 +58,38 @@ public class FrostMMO {
 
     @Listener
     public void onInit(GameInitializationEvent e){
-        instace = this;
+        instance = this;
         registerCommands();
         registerListeners();
-        pluginContainer= Sponge.getPluginManager().fromInstance(instace).get();
+        pluginContainer= Sponge.getPluginManager().fromInstance(instance).get();
+
+        //f = 500 *((int)Math.pow(i,2))-(500 * i);
+        //(int)(25+ Math.sqrt(5*(125+exp)))/50;
     }
 
     private void registerCommands() {
 
+        CommandSpec showStats = CommandSpec.builder()
+                .permission("frostmmo.stats")
+                .executor(new Stats())
+                .build();
+
         CommandSpec baseCommand = CommandSpec.builder()
                 .permission("frostmmo.base")
                 .executor(new Base())
+                .child(showStats,"showstats","stats")
                 .build();
 
         game.getCommandManager().register(this, baseCommand,"frostmmo");
     }
 
     private void registerListeners() {
-
+        Pixelmon.EVENT_BUS.register(new BreedingEvents());
+        Pixelmon.EVENT_BUS.register(new CatchingEvents());
+        Pixelmon.EVENT_BUS.register(new KillingEvents());
     }
 
-    public static Path getDir(){return instace.path;}
+    public static Path getDir(){return instance.path;}
 
 
     public static org.slf4j.Logger getLogger() {

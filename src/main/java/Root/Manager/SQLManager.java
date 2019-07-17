@@ -20,18 +20,19 @@ public class SQLManager {
             Connection connection = getConnection();
             Statement stmt = connection.createStatement();
 
-            stmt.execute(
-                    "CREATE TABLE IF NOT EXISTS PLAYERDB (" +
-                            "PLAYER UUID UNSIGNED NOT NULL," +
-                    "PLAYERNAME VARCHAR(20)," +
-                    "BATTLELEVEL INT NOT NULL DEFAULT 1," +
-                    "BATTLEEXP INT NOT NULL DEFAULT 0," +
 
-                    "CATCHLEVEL INT NOT NULL DEFAULT 1000," +
-                    "CATCHEXP INT NOT NULL DEFAULT 0," +
-                            "BREEDLEVEL INT NOT NULL DEFAULT 1000," +
-                            "BREEDEXP INT NOT NULL DEFAULT 0," +
-                    "PRIMARY KEY (PLAYER))");
+            stmt.execute("CREATE TABLE IF NOT EXISTS `PLAYERDB` (" +
+                    "PLAYER UUID UNSIGNED NOT NULL," +
+                    "`PLAYERNAME` VARCHAR(20)," +
+                    "`BATTLEEXP` INT NOT NULL DEFAULT 0," +
+                    "`CATCHEXP` INT NOT NULL DEFAULT 0," +
+                    "`BREEDEXP` INT NOT NULL DEFAULT 0," +
+                    "`POKEMONKILLED` INT NOT NULL DEFAULT 0," +
+                    "`POKEMONHATCHED` INT NOT NULL DEFAULT 0," +
+                    "`POKEMONBEAD` INT NOT NULL DEFAULT 0," +
+                    "`POKEMONCAUGHT` INT NOT NULL DEFAULT 0," +
+                    "PRIMARY KEY (`PLAYER`)"
+                    );
 
             stmt.close();
             connection.close();
