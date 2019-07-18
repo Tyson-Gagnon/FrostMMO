@@ -11,12 +11,11 @@ import java.sql.Statement;
 
 public class SQLManager {
 
-    private static SqlService sql;
+    private static SqlService sql = Sponge.getServiceManager().provide(SqlService.class).get();
     private static final String URI = "jdbc:h2:" + FrostMMO.getDir().toString() + "/players.db";
 
     public static void load(){
         try{
-            sql = Sponge.getServiceManager().provide(SqlService.class).get();
             Connection connection = getConnection();
             Statement stmt = connection.createStatement();
 
@@ -31,8 +30,7 @@ public class SQLManager {
                     "`POKEMONHATCHED` INT NOT NULL DEFAULT 0," +
                     "`POKEMONBEAD` INT NOT NULL DEFAULT 0," +
                     "`POKEMONCAUGHT` INT NOT NULL DEFAULT 0," +
-                    "PRIMARY KEY (`PLAYER`)"
-                    );
+                    "PRIMARY KEY (`PLAYER`))");
 
             stmt.close();
             connection.close();

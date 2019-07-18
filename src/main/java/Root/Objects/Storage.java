@@ -14,7 +14,7 @@ public class Storage extends SQLManager {
 
         try {
             Connection connection = getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM PLAYERSELO WHERE PLAYER=?");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM PLAYERDB WHERE PLAYER=?");
             preparedStatement.setString(1, player.toString());
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -36,7 +36,7 @@ public class Storage extends SQLManager {
 
         try {
             Connection connection = getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM PLAYERSELO WHERE PLAYER=?");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM PLAYERDB WHERE PLAYER=?");
             preparedStatement.setString(1, player.toString());
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -57,7 +57,7 @@ public class Storage extends SQLManager {
 
         try {
             Connection connection = getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM PLAYERSELO WHERE PLAYER=?");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM PLAYERDB WHERE PLAYER=?");
             preparedStatement.setString(1, player.toString());
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -78,7 +78,7 @@ public class Storage extends SQLManager {
 
         try {
             Connection connection = getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM PLAYERSELO WHERE PLAYER=?");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM PLAYERDB WHERE PLAYER=?");
             preparedStatement.setString(1, player.toString());
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -99,7 +99,7 @@ public class Storage extends SQLManager {
 
         try {
             Connection connection = getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM PLAYERSELO WHERE PLAYER=?");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM PLAYERDB WHERE PLAYER=?");
             preparedStatement.setString(1, player.toString());
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -120,7 +120,7 @@ public class Storage extends SQLManager {
 
         try {
             Connection connection = getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM PLAYERSELO WHERE PLAYER=?");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM PLAYERDB WHERE PLAYER=?");
             preparedStatement.setString(1, player.toString());
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -135,5 +135,68 @@ public class Storage extends SQLManager {
         }
 
         return value;
+    }
+    public static void setBattleXp(UUID player, int xp) {
+
+        try {
+
+            Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("MERGE INTO PLAYERDB (PLAYER,BATTLEEXP) KEY (PLAYER) VALUES (?,?)");
+
+            preparedStatement.setString(1, player.toString());
+            preparedStatement.setInt(2, xp);
+
+
+            preparedStatement.execute();
+
+            preparedStatement.close();
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+    public static void setBreedXp(UUID player, int xp) {
+
+        try {
+
+            Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("MERGE INTO PLAYERDB (PLAYER,BREEDEXP) KEY (PLAYER) VALUES (?,?)");
+
+            preparedStatement.setString(1, player.toString());
+            preparedStatement.setInt(2, xp);
+
+
+            preparedStatement.execute();
+
+            preparedStatement.close();
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+    public static void setCatchingXp(UUID player, int xp) {
+
+        try {
+
+            Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("MERGE INTO PLAYERDB (PLAYER,CATCHEXP) KEY (PLAYER) VALUES (?,?)");
+
+            preparedStatement.setString(1, player.toString());
+            preparedStatement.setInt(2, xp);
+
+
+            preparedStatement.execute();
+
+            preparedStatement.close();
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }

@@ -1,6 +1,7 @@
 package Root;
 
 import Root.Commands.Base;
+import Root.Commands.CommandElemets.TypesCommandElemts;
 import Root.Commands.Stats;
 import Root.Events.BreedingEvents;
 import Root.Events.CatchingEvents;
@@ -10,8 +11,11 @@ import com.google.inject.Inject;
 import com.pixelmonmod.pixelmon.Pixelmon;
 import com.pixelmonmod.pixelmon.api.events.BreedEvent;
 import org.slf4j.Logger;
+import org.spongepowered.api.CatalogType;
+import org.spongepowered.api.CatalogTypes;
 import org.spongepowered.api.Game;
 import org.spongepowered.api.Sponge;
+import org.spongepowered.api.command.args.GenericArguments;
 import org.spongepowered.api.command.spec.CommandSpec;
 import org.spongepowered.api.config.ConfigDir;
 
@@ -22,6 +26,7 @@ import org.spongepowered.api.plugin.Plugin;
 
 import me.itsy.pixelqueue.Managers.ConfigurationManager;
 import org.spongepowered.api.plugin.PluginContainer;
+import org.spongepowered.api.text.Text;
 
 import java.nio.file.Path;
 
@@ -50,7 +55,7 @@ public class FrostMMO {
 
     @Listener
     public void onPreInit(GamePreInitializationEvent e){
-
+        instance = this;
         ConfigurationManager.setup(path);
         SQLManager.load();
 
@@ -58,7 +63,7 @@ public class FrostMMO {
 
     @Listener
     public void onInit(GameInitializationEvent e){
-        instance = this;
+
         registerCommands();
         registerListeners();
         pluginContainer= Sponge.getPluginManager().fromInstance(instance).get();
@@ -69,6 +74,12 @@ public class FrostMMO {
 
     private void registerCommands() {
 
+        CommandSpec addExp = CommandSpec.builder()
+                .permission("frostmmo.addExp")
+                .arguments(GenericArguments.player(Text.of("target")),new TypesCommandElemts(Text.of("stat")),GenericArguments.integer(Text.of("xp")))
+                .executor(new Stats())
+                .build();
+
         CommandSpec showStats = CommandSpec.builder()
                 .permission("frostmmo.stats")
                 .executor(new Stats())
@@ -77,6 +88,7 @@ public class FrostMMO {
         CommandSpec baseCommand = CommandSpec.builder()
                 .permission("frostmmo.base")
                 .executor(new Base())
+                .child(addExp,"addxp","givexp")
                 .child(showStats,"showstats","stats")
                 .build();
 
