@@ -1,5 +1,6 @@
 package Root.Events;
 
+import Root.Manager.ConfigurationManager;
 import Root.Objects.Storage;
 import com.pixelmonmod.pixelmon.Pixelmon;
 import com.pixelmonmod.pixelmon.api.events.BreedEvent;
@@ -17,7 +18,7 @@ import org.spongepowered.api.text.format.TextColors;
 
 public class BreedingEvents {
 
-    CommentedConfigurationNode node = me.itsy.pixelqueue.Managers.ConfigurationManager.getConfNode();
+    CommentedConfigurationNode node = ConfigurationManager.getConfNode();
 
     @SubscribeEvent
     public void onSucessfullBreed(BreedEvent.MakeEgg e){

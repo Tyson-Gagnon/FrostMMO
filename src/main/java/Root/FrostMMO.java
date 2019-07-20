@@ -7,6 +7,7 @@ import Root.Commands.Stats;
 import Root.Events.BreedingEvents;
 import Root.Events.CatchingEvents;
 import Root.Events.KillingEvents;
+import Root.Manager.ConfigurationManager;
 import Root.Manager.SQLManager;
 import com.google.inject.Inject;
 import com.pixelmonmod.pixelmon.Pixelmon;
@@ -21,8 +22,6 @@ import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.game.state.GameInitializationEvent;
 import org.spongepowered.api.event.game.state.GamePreInitializationEvent;
 import org.spongepowered.api.plugin.Plugin;
-
-import me.itsy.pixelqueue.Managers.ConfigurationManager;
 import org.spongepowered.api.plugin.PluginContainer;
 import org.spongepowered.api.text.Text;
 
