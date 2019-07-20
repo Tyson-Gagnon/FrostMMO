@@ -25,11 +25,11 @@ public class AddExp implements CommandExecutor {
                 break;
 
             case "catching":
-                Storage.setBreedXp(target.getUniqueId(),Storage.getCatchEXP(target.getUniqueId())+xp);
+                Storage.setCatchingXp(target.getUniqueId(),Storage.getCatchEXP(target.getUniqueId())+xp);
                 break;
 
             case "battling":
-                Storage.setBreedXp(target.getUniqueId(),Storage.getBattleExp(target.getUniqueId())+xp);
+                Storage.setBattleXp(target.getUniqueId(),Storage.getBattleExp(target.getUniqueId())+xp);
                 break;
 
             default:

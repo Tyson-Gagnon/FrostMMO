@@ -21,6 +21,7 @@ import org.spongepowered.api.entity.living.player.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class CatchingEvents {
 
@@ -35,13 +36,13 @@ public class CatchingEvents {
         AbstractSpawner abstractSpawner = PixelmonSpawning.coordinator.getSpawner(pokemon.getSpecies().name);
         List<String> list = new ArrayList<>();
         list.add(pokemon.getSpecies().name);
-        ICheckSpawns iCheckSpawns = abstractSpawner.checkSpawns.checkSpawns(abstractSpawner,(EntityPlayerMP)player,list);
 
         SpawnInfo spawnInfo;
         SpawnSet spawnInfos = new SpawnSet();
 
         ISelectionAlgorithm iSelectionAlgorithm = abstractSpawner.selectionAlgorithm;
-        int i = iSelectionAlgorithm.getPercentages(abstractSpawner,);
+        //Map i = iSelectionAlgorithm.getPercentages(abstractSpawner,);
+
 
     }
 }

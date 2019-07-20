@@ -1,5 +1,6 @@
 package Root;
 
+import Root.Commands.AddExp;
 import Root.Commands.Base;
 import Root.Commands.CommandElemets.TypesCommandElemts;
 import Root.Commands.Stats;
@@ -11,10 +12,7 @@ import com.google.inject.Inject;
 import com.pixelmonmod.pixelmon.Pixelmon;
 import com.pixelmonmod.pixelmon.api.events.BreedEvent;
 import org.slf4j.Logger;
-import org.spongepowered.api.CatalogType;
-import org.spongepowered.api.CatalogTypes;
-import org.spongepowered.api.Game;
-import org.spongepowered.api.Sponge;
+import org.spongepowered.api.*;
 import org.spongepowered.api.command.args.GenericArguments;
 import org.spongepowered.api.command.spec.CommandSpec;
 import org.spongepowered.api.config.ConfigDir;
@@ -74,10 +72,11 @@ public class FrostMMO {
 
     private void registerCommands() {
 
+
         CommandSpec addExp = CommandSpec.builder()
                 .permission("frostmmo.addExp")
                 .arguments(GenericArguments.player(Text.of("target")),new TypesCommandElemts(Text.of("stat")),GenericArguments.integer(Text.of("xp")))
-                .executor(new Stats())
+                .executor(new AddExp())
                 .build();
 
         CommandSpec showStats = CommandSpec.builder()

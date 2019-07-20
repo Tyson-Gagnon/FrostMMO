@@ -17,6 +17,7 @@ import org.spongepowered.api.scoreboard.objective.Objective;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
 import org.spongepowered.api.text.format.TextStyles;
+import org.spongepowered.api.world.Location;
 
 
 public class Stats implements CommandExecutor {
@@ -38,21 +39,21 @@ public class Stats implements CommandExecutor {
 
         objective.getOrCreateScore(Text.of("   ")).setScore(30);
         objective.getOrCreateScore(Text.of(TextColors.YELLOW, "Breeding: ")).setScore(29);
-        objective.getOrCreateScore(Text.of(TextColors.GREEN, playerLevels.getBreedlevel())).setScore(28);
+        objective.getOrCreateScore(Text.of(TextColors.GREEN, playerLevels.getBreedlevel()+" ")).setScore(28);
         objective.getOrCreateScore(Text.of(TextColors.WHITE, TextStyles.UNDERLINE,
-                Storage.getBreedExp(player.getUniqueId()), "/", (500 * ((int) Math.pow(playerLevels.getBreedlevel() + 1, 2)) - (500 * (playerLevels.getBreedlevel() + 1)))
+                Storage.getBreedExp(player.getUniqueId()), "/", (500 * ((int) Math.pow(playerLevels.getBreedlevel() + 1, 2)) - (500 * (playerLevels.getBreedlevel() + 1)))+" "
         )).setScore(27);
 
         objective.getOrCreateScore(Text.of(TextColors.YELLOW, "Catching: ")).setScore(26);
-        objective.getOrCreateScore(Text.of(TextColors.GREEN, playerLevels.getCathclevel())).setScore(25);
+        objective.getOrCreateScore(Text.of(TextColors.GREEN, playerLevels.getCathclevel()+"  ")).setScore(25);
         objective.getOrCreateScore(Text.of(TextColors.WHITE, TextStyles.UNDERLINE,
-                Storage.getCatchEXP(player.getUniqueId()), "/", (500 * ((int) Math.pow(playerLevels.getCathclevel() + 1, 2)) - (500 * (playerLevels.getCathclevel() + 1)))
+                Storage.getCatchEXP(player.getUniqueId()), "/", (500 * ((int) Math.pow(playerLevels.getCathclevel() + 1, 2)) - (500 * (playerLevels.getCathclevel() + 1)))+"  "
         )).setScore(24);
 
         objective.getOrCreateScore(Text.of(TextColors.YELLOW, "Battling: ")).setScore(23);
-        objective.getOrCreateScore(Text.of(TextColors.GREEN, playerLevels.getKilllevel())).setScore(22);
+        objective.getOrCreateScore(Text.of(TextColors.GREEN, playerLevels.getKilllevel()+"   ")).setScore(22);
         objective.getOrCreateScore(Text.of(TextColors.WHITE, TextStyles.UNDERLINE,
-                Storage.getBattleExp(player.getUniqueId()), "/", (500 * ((int) Math.pow(playerLevels.getKilllevel() + 1, 2)) - (500 * (playerLevels.getKilllevel() + 1)))
+                Storage.getBattleExp(player.getUniqueId()), "/", (500 * ((int) Math.pow(playerLevels.getKilllevel() + 1, 2)) - (500 * (playerLevels.getKilllevel() + 1)))+"   "
         )).setScore(21);
 
         scoreboard.addObjective(objective);

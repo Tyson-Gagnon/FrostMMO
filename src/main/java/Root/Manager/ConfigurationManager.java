@@ -1,6 +1,7 @@
 package me.itsy.pixelqueue.Managers;
 
 import Root.FrostMMO;
+import info.pixelmon.repack.ninja.leaping.configurate.ConfigurationNode;
 import info.pixelmon.repack.ninja.leaping.configurate.commented.CommentedConfigurationNode;
 import info.pixelmon.repack.ninja.leaping.configurate.hocon.HoconConfigurationLoader;
 import info.pixelmon.repack.ninja.leaping.configurate.loader.ConfigurationLoader;
@@ -32,6 +33,16 @@ public class ConfigurationManager {
             configurationNode = configurationLoader.load();
 
             configurationNode.getNode("version").setValue(1);
+            configurationNode.getNode("XPValues","Breeding","xp-per-egg-make").setValue(50);
+
+            configurationNode.getNode("XPValues","Breeding","xp-per-egg-hatch").setComment("change this value to change the xp/1000steps 0.005 == 5xp 0.01 would be 10 xp");
+            configurationNode.getNode("XPValues","Breeding","xp-per-egg-hatch").setValue(0.005);
+
+            configurationNode.getNode("XPValues","Battling","xp-per-kill").setValue(500);
+
+            configurationNode.getNode("XPValues","Catching","xp-per-catch").setValue(500);
+
+
             save();
 
         } catch(IOException e) {
