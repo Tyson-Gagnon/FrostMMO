@@ -1,4 +1,4 @@
-package me.itsy.pixelqueue.Managers;
+package Root.Manager;
 
 import Root.FrostMMO;
 import info.pixelmon.repack.ninja.leaping.configurate.ConfigurationNode;
