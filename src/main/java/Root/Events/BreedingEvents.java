@@ -6,6 +6,7 @@ import com.pixelmonmod.pixelmon.Pixelmon;
 import com.pixelmonmod.pixelmon.api.events.BreedEvent;
 import com.pixelmonmod.pixelmon.api.events.EggHatchEvent;
 import com.pixelmonmod.pixelmon.api.pokemon.Pokemon;
+import com.pixelmonmod.pixelmon.config.PixelmonConfig;
 import com.pixelmonmod.pixelmon.entities.pixelmon.stats.BaseStats;
 import info.pixelmon.repack.ninja.leaping.configurate.commented.CommentedConfigurationNode;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -69,6 +70,37 @@ public class BreedingEvents {
                     "You gained ", TextColors.YELLOW, xp, TextColors.GRAY, " xp in the", TextColors.YELLOW, " breeding ", TextColors.GRAY, "stat!"
             ));
 
+        }
+    }
+
+
+    @SubscribeEvent
+    public void onEggGain(BreedEvent.CollectEgg event) {
+
+
+        Player player = Sponge.getServer().getPlayer(event.owner).get();
+        Pokemon pokemon = event.getEgg();
+
+        if (pokemon.isEgg()) {
+            final int steps = (pokemon.getEggCycles()) * PixelmonConfig.stepsPerEggCycle - pokemon.getEggSteps();
+
+
+            int defaultSteps = (Pixelmon.pokemonFactory.create(pokemon.getSpecies()).makeEgg().getBaseStats().eggCycles * PixelmonConfig.stepsPerEggCycle);
+
+
+            if (steps == defaultSteps) {
+                int breedLevel = (int) (25 + Math.sqrt(5 * (125 + Storage.getBreedExp(player.getUniqueId())))) / 50;
+                int stepsToRemovePerLevel = ConfigurationManager.getConfNode("MultiplierValues", "breeding", "steps-removed-per-level").getInt();
+                int stepsToRemove = stepsToRemovePerLevel * breedLevel;
+
+                pokemon.setEggSteps(stepsToRemove);
+
+                player.sendMessage(Text.of(TextColors.AQUA, "[FrostMMO] - ", TextColors.GRAY,
+                        "Based on your breeding level, ", TextColors.YELLOW, stepsToRemove, " steps", TextColors.GRAY,
+                        " have been taken off of your egg!"
+                ));
+
+            }
         }
     }
 

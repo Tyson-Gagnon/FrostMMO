@@ -38,12 +38,14 @@ public class ConfigurationManager {
             configurationNode.getNode("XPValues","Breeding","xp-per-egg-hatch").setComment("change this value to change the xp/1000steps 0.005 == 5xp, 0.01 == 10 xp");
             configurationNode.getNode("XPValues","Breeding","xp-per-egg-hatch").setValue(0.005);
 
-            configurationNode.getNode("XPValues","Battling","xp-per-kill").setValue(500);
+            configurationNode.getNode("XPValues", "Battling", "xp-per-level").setValue(5);
+            configurationNode.getNode("XPValues", "Battling", "legend-xp-bonus").setValue(100);
 
             configurationNode.getNode("XPValues","Catching","xp-per-catch").setValue(500);
             ////////////////////////////////////////////////////////////
 
-            configurationNode.getNode("MultiplierValues","breeding","steps-removed-per-level").setValue(5);
+            configurationNode.getNode("MultiplierValues", "Breeding", "steps-removed-per-level").setValue(5);
+
 
 
             save();

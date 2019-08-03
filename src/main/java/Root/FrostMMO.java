@@ -4,7 +4,6 @@ import Root.Commands.AddExp;
 import Root.Commands.Base;
 import Root.Commands.CommandElemets.TypesCommandElemts;
 import Root.Commands.Stats;
-import Root.Events.BreedSetting;
 import Root.Events.BreedingEvents;
 import Root.Events.CatchingEvents;
 import Root.Events.KillingEvents;
@@ -12,7 +11,6 @@ import Root.Manager.ConfigurationManager;
 import Root.Manager.SQLManager;
 import com.google.inject.Inject;
 import com.pixelmonmod.pixelmon.Pixelmon;
-import com.pixelmonmod.pixelmon.api.events.BreedEvent;
 import org.slf4j.Logger;
 import org.spongepowered.api.*;
 import org.spongepowered.api.command.args.GenericArguments;
@@ -32,6 +30,7 @@ import java.nio.file.Path;
         name = "FrostMMO",
         version = "0.1",
         id = "frostmmoid",
+        description = "A MMO plugin for pixelmon made for the PermaFrostMC Server! :)",
         authors = {"itsTyxD","Future"}
 )
 public class FrostMMO {
@@ -98,8 +97,6 @@ public class FrostMMO {
         Pixelmon.EVENT_BUS.register(new BreedingEvents());
         Pixelmon.EVENT_BUS.register(new CatchingEvents());
         Pixelmon.EVENT_BUS.register(new KillingEvents());
-        Pixelmon.EVENT_BUS.register(new BreedSetting());
-
 
     }
 
