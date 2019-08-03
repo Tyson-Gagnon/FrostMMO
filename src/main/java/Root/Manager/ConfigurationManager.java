@@ -41,6 +41,9 @@ public class ConfigurationManager {
             configurationNode.getNode("XPValues","Battling","xp-per-kill").setValue(500);
 
             configurationNode.getNode("XPValues","Catching","xp-per-catch").setValue(500);
+            ////////////////////////////////////////////////////////////
+
+            configurationNode.getNode("MultiplierValues","breeding","steps-removed-per-level").setValue(5);
 
 
             save();

@@ -4,6 +4,7 @@ import Root.Commands.AddExp;
 import Root.Commands.Base;
 import Root.Commands.CommandElemets.TypesCommandElemts;
 import Root.Commands.Stats;
+import Root.Events.BreedSetting;
 import Root.Events.BreedingEvents;
 import Root.Events.CatchingEvents;
 import Root.Events.KillingEvents;
@@ -97,6 +98,7 @@ public class FrostMMO {
         Pixelmon.EVENT_BUS.register(new BreedingEvents());
         Pixelmon.EVENT_BUS.register(new CatchingEvents());
         Pixelmon.EVENT_BUS.register(new KillingEvents());
+        Pixelmon.EVENT_BUS.register(new BreedSetting());
 
 
     }

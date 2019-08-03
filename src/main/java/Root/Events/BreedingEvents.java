@@ -22,46 +22,54 @@ public class BreedingEvents {
     CommentedConfigurationNode node = ConfigurationManager.getConfNode();
 
     @SubscribeEvent
-    public void onSucessfullBreed(BreedEvent.MakeEgg e){
+    public void onSucessfullBreed(BreedEvent.MakeEgg e) {
 
-        Sponge.getServer().getBroadcastChannel().send(Text.of("Make Egg event found!"));
+        int breedLevel = (int) (25 + Math.sqrt(5 * (125 + Storage.getBreedExp(e.owner)))) / 50;
 
-        int xp = node.getNode("XPValues","Breeding","xp-per-egg-make").getInt();
+        if (!(breedLevel >= 100)) {
 
-        UserStorageService userStorageService = Sponge.getServiceManager().provide(UserStorageService.class).get();
-        User user = userStorageService.get(e.owner).get();
+            Sponge.getServer().getBroadcastChannel().send(Text.of("Make Egg event found!"));
 
-        Storage.setBreedXp(user.getUniqueId(),Storage.getBreedExp(user.getUniqueId()) + xp);
+            int xp = node.getNode("XPValues", "Breeding", "xp-per-egg-make").getInt();
 
-        if(user.getPlayer().isPresent()){
-            Player player = user.getPlayer().get();
-            player.sendMessage(Text.of(TextColors.AQUA,"[FrostMMO] - ",TextColors.GRAY,
-                    "You gained ",TextColors.YELLOW,xp,TextColors.GRAY," xp in the",TextColors.YELLOW, " breeding ",TextColors.GRAY, "stat!"
-                    ));
+            UserStorageService userStorageService = Sponge.getServiceManager().provide(UserStorageService.class).get();
+            User user = userStorageService.get(e.owner).get();
+
+            Storage.setBreedXp(user.getUniqueId(), Storage.getBreedExp(user.getUniqueId()) + xp);
+
+            if (user.getPlayer().isPresent()) {
+                Player player = user.getPlayer().get();
+                player.sendMessage(Text.of(TextColors.AQUA, "[FrostMMO] - ", TextColors.GRAY,
+                        "You gained ", TextColors.YELLOW, xp, TextColors.GRAY, " xp in the", TextColors.YELLOW, " breeding ", TextColors.GRAY, "stat!"
+                ));
+            }
         }
-
     }
 
     @SubscribeEvent
-    public void onEggHatch(EggHatchEvent e){
-        Player player = (Player) e.pokemon.getOwnerPlayer();
+    public void onEggHatch(EggHatchEvent e) {
+        int breedLevel = (int) (25 + Math.sqrt(5 * (125 + Storage.getBreedExp(e.pokemon.getOwnerPlayerUUID())))) / 50;
+
+        if (!(breedLevel >= 100)) {
+            Player player = (Player) e.pokemon.getOwnerPlayer();
 
 
-        Pokemon pokemon = e.pokemon;
-        Pokemon copyOfPokemon = Pixelmon.pokemonFactory.create(pokemon.getSpecies());
+            Pokemon pokemon = e.pokemon;
+            Pokemon copyOfPokemon = Pixelmon.pokemonFactory.create(pokemon.getSpecies());
 
-        int stepsToHatch = copyOfPokemon.getBaseStats().eggCycles * 255;
+            int stepsToHatch = copyOfPokemon.getBaseStats().eggCycles * 255;
 
-        double xpGain = ConfigurationManager.getConfNode("XPValues","Breeding","xp-per-egg-hatch").getDouble();
+            double xpGain = ConfigurationManager.getConfNode("XPValues", "Breeding", "xp-per-egg-hatch").getDouble();
 
-        int xp = (int) (stepsToHatch*xpGain);
+            int xp = (int) (stepsToHatch * xpGain);
 
-        Storage.setBreedXp(player.getUniqueId(),Storage.getBreedExp(player.getUniqueId()) + xp);
+            Storage.setBreedXp(player.getUniqueId(), Storage.getBreedExp(player.getUniqueId()) + xp);
 
-        player.sendMessage(Text.of(TextColors.AQUA,"[FrostMMO] - ",TextColors.GRAY,
-                "You gained ",TextColors.YELLOW,xp,TextColors.GRAY," xp in the",TextColors.YELLOW, " breeding ",TextColors.GRAY, "stat!"
-        ));
+            player.sendMessage(Text.of(TextColors.AQUA, "[FrostMMO] - ", TextColors.GRAY,
+                    "You gained ", TextColors.YELLOW, xp, TextColors.GRAY, " xp in the", TextColors.YELLOW, " breeding ", TextColors.GRAY, "stat!"
+            ));
 
+        }
     }
 
 }
