@@ -35,7 +35,7 @@ public class ConfigurationManager {
             configurationNode.getNode("version").setValue(1);
             configurationNode.getNode("XPValues","Breeding","xp-per-egg-make").setValue(50);
 
-            configurationNode.getNode("XPValues","Breeding","xp-per-egg-hatch").setComment("change this value to change the xp/1000steps 0.005 == 5xp 0.01 would be 10 xp");
+            configurationNode.getNode("XPValues","Breeding","xp-per-egg-hatch").setComment("change this value to change the xp/1000steps 0.005 == 5xp, 0.01 == 10 xp");
             configurationNode.getNode("XPValues","Breeding","xp-per-egg-hatch").setValue(0.005);
 
             configurationNode.getNode("XPValues","Battling","xp-per-kill").setValue(500);

@@ -97,6 +97,8 @@ public class FrostMMO {
         Pixelmon.EVENT_BUS.register(new BreedingEvents());
         Pixelmon.EVENT_BUS.register(new CatchingEvents());
         Pixelmon.EVENT_BUS.register(new KillingEvents());
+
+
     }
 
     public static Path getDir(){return instance.path;}

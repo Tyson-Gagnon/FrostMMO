@@ -6,6 +6,7 @@ import com.pixelmonmod.pixelmon.Pixelmon;
 import com.pixelmonmod.pixelmon.api.events.BreedEvent;
 import com.pixelmonmod.pixelmon.api.events.EggHatchEvent;
 import com.pixelmonmod.pixelmon.api.pokemon.Pokemon;
+import com.pixelmonmod.pixelmon.entities.pixelmon.stats.BaseStats;
 import info.pixelmon.repack.ninja.leaping.configurate.commented.CommentedConfigurationNode;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.spongepowered.api.Sponge;
@@ -49,10 +50,17 @@ public class BreedingEvents {
         Pokemon pokemon = e.pokemon;
         Pokemon copyOfPokemon = Pixelmon.pokemonFactory.create(pokemon.getSpecies());
 
-        int stepsToHatch = copyOfPokemon.makeEgg().getEggSteps();
+        int stepsToHatch = copyOfPokemon.getBaseStats().eggCycles * 255;
 
-        int xp = (int) (stepsToHatch*0.005);
+        double xpGain = ConfigurationManager.getConfNode("XPValues","Breeding","xp-per-egg-hatch").getDouble();
 
+        int xp = (int) (stepsToHatch*xpGain);
+
+        Storage.setBreedXp(player.getUniqueId(),Storage.getBreedExp(player.getUniqueId()) + xp);
+
+        player.sendMessage(Text.of(TextColors.AQUA,"[FrostMMO] - ",TextColors.GRAY,
+                "You gained ",TextColors.YELLOW,xp,TextColors.GRAY," xp in the",TextColors.YELLOW, " breeding ",TextColors.GRAY, "stat!"
+        ));
 
     }
 
