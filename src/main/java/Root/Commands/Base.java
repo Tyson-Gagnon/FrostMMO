@@ -13,7 +13,11 @@ public class Base implements CommandExecutor
 {
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-        src.sendMessage(Text.of(TextColors.AQUA,"[FrostMMO] - ",TextColors.GRAY,"A Pixelmon MMO plugin made by itsTyxD and Future, Version:", FrostMMO.pluginContainer.getVersion()));
+        src.sendMessage(Text.of(TextColors.AQUA, "[FrostMMO] - ", TextColors.GRAY, "A Pixelmon MMO plugin made by itsTyxD, Version:", FrostMMO.pluginContainer.getVersion()));
+        src.sendMessage(Text.of(TextColors.AQUA, "/frostmmo -", TextColors.GRAY, " Base command of the plugin that shows version and the commands"));
+        src.sendMessage(Text.of(TextColors.AQUA, "/frostmmo stats -", TextColors.GRAY, " Shows your current stats on your sidebar."));
+        src.sendMessage(Text.of(TextColors.AQUA, "/frostmmo hide -", TextColors.GRAY, " Hides your sidebar"));
+        src.sendMessage(Text.of(TextColors.AQUA, "/frostmmo togglestats -", TextColors.GRAY, " Toggles the auto updating of the stats sidebar"));
         return CommandResult.success();
     }
 }

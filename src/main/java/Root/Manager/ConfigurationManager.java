@@ -41,13 +41,18 @@ public class ConfigurationManager {
             configurationNode.getNode("XPValues", "Battling", "xp-per-level").setValue(5);
             configurationNode.getNode("XPValues", "Battling", "legend-xp-bonus").setValue(100);
 
-            configurationNode.getNode("XPValues","Catching","xp-per-catch").setValue(500);
+            configurationNode.getNode("XPValues", "Catching", "xp-per-catch").setValue(495);
+            configurationNode.getNode("XPValues", "Catching", "Legend-Bonus").setComment("NOTE: THIS VALUE IS ADDED ON TOP OF THE XP-PER-CATCH VALUE. IF YOU CATCH A LEGEND, THE XP YOU GET IS XP-PER-CATCH + LEGEND-BONUS!");
+            configurationNode.getNode("XPValues", "Catching", "Legend-Bonus").setValue(9000);
             ////////////////////////////////////////////////////////////
 
             configurationNode.getNode("MultiplierValues", "Breeding", "steps-removed-per-level").setValue(5);
 
             configurationNode.getNode("MultiplierValues", "Battling", "xp-multiplier-per-level").setComment("Multiplier per level. 0.03 per level = 3x at level 100. 0.04 would be 4x ect..");
             configurationNode.getNode("MultiplierValues", "Battling", "xp-multiplier-per-level").setValue(0.03);
+
+            configurationNode.getNode("MultiplierValues", "Catching", "percent-to-shiny-at-max").setValue(0.5);
+            configurationNode.getNode("MultiplierValues", "Catching", "percent-to-HA-at-max").setValue(2.0);
 
 
 

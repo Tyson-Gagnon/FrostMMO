@@ -91,6 +91,7 @@ public class BreedingEvents {
             player.sendMessage(Text.of(TextColors.AQUA, "[FrostMMO] - ", TextColors.GRAY,
                     "You gained ", TextColors.YELLOW, xp, TextColors.GRAY, " xp in the", TextColors.YELLOW, " breeding ", TextColors.GRAY, "stat!"
             ));
+
             if (!FrostMMO.updateExemptions.contains(player.getUniqueId().toString())) {
                 Stats.updateScoreBoard(player);
             }
