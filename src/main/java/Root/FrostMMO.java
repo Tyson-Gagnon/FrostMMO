@@ -1,9 +1,7 @@
 package Root;
 
-import Root.Commands.AddExp;
-import Root.Commands.Base;
+import Root.Commands.*;
 import Root.Commands.CommandElemets.TypesCommandElemts;
-import Root.Commands.Stats;
 import Root.Events.BreedingEvents;
 import Root.Events.CatchingEvents;
 import Root.Events.KillingEvents;
@@ -25,6 +23,8 @@ import org.spongepowered.api.plugin.PluginContainer;
 import org.spongepowered.api.text.Text;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 
 @Plugin(
         name = "FrostMMO",
@@ -50,6 +50,8 @@ public class FrostMMO {
 
     public static PluginContainer pluginContainer;
 
+    public static List<String> updateExemptions = new ArrayList<>();
+
     @Listener
     public void onPreInit(GamePreInitializationEvent e){
         instance = this;
@@ -72,6 +74,11 @@ public class FrostMMO {
     private void registerCommands() {
 
 
+        CommandSpec toggleMessages = CommandSpec.builder()
+                .permission("frostmmo.toggle")
+                .executor(new ToggleUpdates())
+                .build();
+
         CommandSpec addExp = CommandSpec.builder()
                 .permission("frostmmo.addExp")
                 .arguments(GenericArguments.player(Text.of("target")),new TypesCommandElemts(Text.of("stat")),GenericArguments.integer(Text.of("xp")))
@@ -83,11 +90,18 @@ public class FrostMMO {
                 .executor(new Stats())
                 .build();
 
+        CommandSpec hideStats = CommandSpec.builder()
+                .permission("frostmmo.stats")
+                .executor(new HideStats())
+                .build();
+
         CommandSpec baseCommand = CommandSpec.builder()
                 .permission("frostmmo.base")
                 .executor(new Base())
-                .child(addExp,"addxp","givexp")
-                .child(showStats,"showstats","stats")
+                .child(addExp, "addxp")
+                .child(showStats, "stats")
+                .child(hideStats, "hide", "hidestats")
+                .child(toggleMessages, "togglestats")
                 .build();
 
         game.getCommandManager().register(this, baseCommand,"frostmmo");

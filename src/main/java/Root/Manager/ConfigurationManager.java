@@ -46,6 +46,9 @@ public class ConfigurationManager {
 
             configurationNode.getNode("MultiplierValues", "Breeding", "steps-removed-per-level").setValue(5);
 
+            configurationNode.getNode("MultiplierValues", "Battling", "xp-multiplier-per-level").setComment("Multiplier per level. 0.03 per level = 3x at level 100. 0.04 would be 4x ect..");
+            configurationNode.getNode("MultiplierValues", "Battling", "xp-multiplier-per-level").setValue(0.03);
+
 
 
             save();
