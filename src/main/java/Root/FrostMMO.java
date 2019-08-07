@@ -31,7 +31,7 @@ import java.util.List;
         version = "1.0",
         id = "frostmmoid",
         description = "A MMO plugin for pixelmon made for the PermaFrostMC Server! :)",
-        authors = {"itsTyxD"}
+        authors = {"itsTyxD", ""}
 )
 public class FrostMMO {
 
