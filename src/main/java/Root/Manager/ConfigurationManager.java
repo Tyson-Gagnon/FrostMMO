@@ -26,40 +26,43 @@ public class ConfigurationManager {
 
     public static void load() {
         try {
-            if(!Files.exists(dir))
+            if (!Files.exists(dir)) {
                 Files.createDirectory(dir);
 
-            configurationLoader = HoconConfigurationLoader.builder().setPath(config).build();
-            configurationNode = configurationLoader.load();
+                configurationLoader = HoconConfigurationLoader.builder().setPath(config).build();
+                configurationNode = configurationLoader.load();
 
-            configurationNode.getNode("version").setValue(1);
-            configurationNode.getNode("XPValues","Breeding","xp-per-egg-make").setValue(50);
+                configurationNode.getNode("version").setValue(1);
+                configurationNode.getNode("XPValues", "Breeding", "xp-per-egg-make").setValue(50);
 
-            configurationNode.getNode("XPValues","Breeding","xp-per-egg-hatch").setComment("change this value to change the xp/1000steps 0.005 == 5xp, 0.01 == 10 xp");
-            configurationNode.getNode("XPValues","Breeding","xp-per-egg-hatch").setValue(0.005);
+                configurationNode.getNode("XPValues", "Breeding", "xp-per-egg-hatch").setComment("change this value to change the xp/1000steps 0.005 == 5xp, 0.01 == 10 xp");
+                configurationNode.getNode("XPValues", "Breeding", "xp-per-egg-hatch").setValue(0.005);
 
-            configurationNode.getNode("XPValues", "Battling", "xp-per-level").setValue(5);
-            configurationNode.getNode("XPValues", "Battling", "legend-xp-bonus").setValue(100);
+                configurationNode.getNode("XPValues", "Battling", "xp-per-level").setValue(5);
+                configurationNode.getNode("XPValues", "Battling", "legend-xp-bonus").setValue(100);
 
-            configurationNode.getNode("XPValues", "Catching", "xp-per-catch").setValue(495);
-            configurationNode.getNode("XPValues", "Catching", "Legend-Bonus").setComment("NOTE: THIS VALUE IS ADDED ON TOP OF THE XP-PER-CATCH VALUE. IF YOU CATCH A LEGEND, THE XP YOU GET IS XP-PER-CATCH + LEGEND-BONUS!");
-            configurationNode.getNode("XPValues", "Catching", "Legend-Bonus").setValue(9000);
-            ////////////////////////////////////////////////////////////
+                configurationNode.getNode("XPValues", "Catching", "xp-per-catch").setValue(495);
+                configurationNode.getNode("XPValues", "Catching", "Legend-Bonus").setComment("NOTE: THIS VALUE IS ADDED ON TOP OF THE XP-PER-CATCH VALUE. IF YOU CATCH A LEGEND, THE XP YOU GET IS XP-PER-CATCH + LEGEND-BONUS!");
+                configurationNode.getNode("XPValues", "Catching", "Legend-Bonus").setValue(9000);
+                ////////////////////////////////////////////////////////////
 
-            configurationNode.getNode("MultiplierValues", "Breeding", "steps-removed-per-level").setValue(5);
+                configurationNode.getNode("MultiplierValues", "Breeding", "steps-removed-per-level").setValue(5);
 
-            configurationNode.getNode("MultiplierValues", "Battling", "xp-multiplier-per-level").setComment("Multiplier per level. 0.03 per level = 3x at level 100. 0.04 would be 4x ect..");
-            configurationNode.getNode("MultiplierValues", "Battling", "xp-multiplier-per-level").setValue(0.03);
+                configurationNode.getNode("MultiplierValues", "Battling", "xp-multiplier-per-level").setComment("Multiplier per level. 0.03 per level = 3x at level 100. 0.04 would be 4x ect..");
+                configurationNode.getNode("MultiplierValues", "Battling", "xp-multiplier-per-level").setValue(0.03);
 
-            configurationNode.getNode("MultiplierValues", "Catching", "percent-to-shiny-at-max").setValue(0.5);
-            configurationNode.getNode("MultiplierValues", "Catching", "percent-to-HA-at-max").setValue(2.0);
+                configurationNode.getNode("MultiplierValues", "Catching", "percent-to-shiny-at-max").setValue(70.0);
+                configurationNode.getNode("MultiplierValues", "Catching", "percent-to-HA-at-max").setValue(2.0);
 
 
-
-            save();
-
-        } catch(IOException e) {
-            FrostMMO.getInstance().getLogger().error("Error loading up PokeTeams Configuration"); e.printStackTrace();
+                save();
+            } else {
+                configurationLoader = HoconConfigurationLoader.builder().setPath(config).build();
+                configurationNode = configurationLoader.load();
+            }
+        } catch (IOException e) {
+            FrostMMO.getInstance().getLogger().error("Error loading up PokeTeams Configuration");
+            e.printStackTrace();
         }
     }
 
@@ -68,7 +71,8 @@ public class ConfigurationManager {
             configurationLoader.save(configurationNode);
 
         } catch (IOException e) {
-            FrostMMO.getInstance().getLogger().error("Error saving PokeTeams Configuration"); e.printStackTrace();
+            FrostMMO.getInstance().getLogger().error("Error saving PokeTeams Configuration");
+            e.printStackTrace();
         }
     }
 

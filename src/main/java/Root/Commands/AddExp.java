@@ -31,7 +31,7 @@ public class AddExp implements CommandExecutor {
 
             case "catching":
                 if (!(Storage.getCatchEXP(target.getUniqueId()) + xp > 4950000)) {
-                    Storage.setCatchingXp(target.getUniqueId(), Storage.getCatchLevel(target.getUniqueId()) + xp);
+                    Storage.setCatchingXp(target.getUniqueId(), Storage.getCatchEXP(target.getUniqueId()) + xp);
                 } else {
                     src.sendMessage(Text.of(TextColors.RED, "Players cannot exceed a total of 495000 xp(lvl100)! The max you can give to the player is ",
                             4950000 - Storage.getCatchEXP(target.getUniqueId())));

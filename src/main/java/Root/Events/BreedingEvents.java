@@ -23,8 +23,6 @@ import org.spongepowered.api.text.format.TextColors;
 
 public class BreedingEvents {
 
-    CommentedConfigurationNode node = ConfigurationManager.getConfNode();
-
     @SubscribeEvent
     public void onSucessfullBreed(BreedEvent.MakeEgg e) {
 
@@ -42,7 +40,7 @@ public class BreedingEvents {
 
         if (!(breedLevel >= 100)) {
 
-            int xp = node.getNode("XPValues", "Breeding", "xp-per-egg-make").getInt();
+            int xp = ConfigurationManager.getConfNode("XPValues", "Breeding", "xp-per-egg-make").getInt();
 
 
 
@@ -106,6 +104,12 @@ public class BreedingEvents {
         Player player = Sponge.getServer().getPlayer(event.owner).get();
         Pokemon pokemon = event.getEgg();
 
+        PlayerLevels playerLevels = new PlayerLevels(
+                player,
+                Storage.getBreedExp(player.getUniqueId()),
+                Storage.getCatchEXP(player.getUniqueId()),
+                Storage.getBattleExp(player.getUniqueId()));
+
         if (pokemon.isEgg()) {
             final int steps = (pokemon.getEggCycles()) * PixelmonConfig.stepsPerEggCycle - pokemon.getEggSteps();
 
@@ -114,8 +118,8 @@ public class BreedingEvents {
 
 
             if (steps == defaultSteps) {
-                int breedLevel = (int) (25 + Math.sqrt(5 * (125 + Storage.getBreedExp(player.getUniqueId())))) / 50;
-                int stepsToRemovePerLevel = ConfigurationManager.getConfNode("MultiplierValues", "breeding", "steps-removed-per-level").getInt();
+                int breedLevel = playerLevels.getBreedlevel();
+                int stepsToRemovePerLevel = ConfigurationManager.getConfNode("MultiplierValues", "Breeding", "steps-removed-per-level").getInt();
                 int stepsToRemove = stepsToRemovePerLevel * breedLevel;
 
                 pokemon.setEggSteps(stepsToRemove);

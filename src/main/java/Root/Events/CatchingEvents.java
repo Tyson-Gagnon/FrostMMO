@@ -34,25 +34,34 @@ public class CatchingEvents {
     private EnumSpecies[] legendaryEnums = EnumSpecies.LEGENDARY_ENUMS;
 
     @SubscribeEvent
-    public void onCatch(CaptureEvent.SuccessfulCapture e){
+    public void onCatch(CaptureEvent.SuccessfulCapture e) {
 
-        Player player = (Player)e.player;
+        Player player = (Player) e.player;
         Pokemon pokemon = e.getPokemon().getPokemonData();
 
         int xpToGive = ConfigurationManager.getConfNode("XPValues", "Catching", "xp-per-catch").getInt();
 
-        for (EnumSpecies legendaryEnum : legendaryEnums) {
-            if (legendaryEnum.equals(pokemon.getSpecies())) {
-                xpToGive = xpToGive + ConfigurationManager.getConfNode("XPValues", "Catching", "Legend-Bonus").getInt();
-            }
-        }
+        PlayerLevels playerLevels = new PlayerLevels(
+                player.getPlayer().get(),
+                Storage.getBreedExp(player.getUniqueId()),
+                Storage.getCatchEXP(player.getUniqueId()),
+                Storage.getBattleExp(player.getUniqueId()));
 
-        Storage.setCatchingXp(player.getUniqueId(), Storage.getCatchEXP(player.getUniqueId()) + xpToGive);
-        player.sendMessage(Text.of(TextColors.AQUA, "[FrostMMO] - ", TextColors.GRAY,
-                "You gained ", TextColors.YELLOW, xpToGive, TextColors.GRAY, " xp in the", TextColors.YELLOW, " catching ", TextColors.GRAY, "stat!"
-        ));
-        if (!FrostMMO.updateExemptions.contains(player.getUniqueId().toString())) {
-            Stats.updateScoreBoard(player);
+        if (!(playerLevels.getCathclevel() >= 100)) {
+
+            for (EnumSpecies legendaryEnum : legendaryEnums) {
+                if (legendaryEnum.equals(pokemon.getSpecies())) {
+                    xpToGive = xpToGive + ConfigurationManager.getConfNode("XPValues", "Catching", "Legend-Bonus").getInt();
+                }
+            }
+
+            Storage.setCatchingXp(player.getUniqueId(), Storage.getCatchEXP(player.getUniqueId()) + xpToGive);
+            player.sendMessage(Text.of(TextColors.AQUA, "[FrostMMO] - ", TextColors.GRAY,
+                    "You gained ", TextColors.YELLOW, xpToGive, TextColors.GRAY, " xp in the", TextColors.YELLOW, " catching ", TextColors.GRAY, "stat!"
+            ));
+            if (!FrostMMO.updateExemptions.contains(player.getUniqueId().toString())) {
+                Stats.updateScoreBoard(player);
+            }
         }
     }
 
