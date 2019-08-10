@@ -31,7 +31,7 @@ import java.util.List;
         version = "1.0",
         id = "frostmmoid",
         description = "A MMO plugin for pixelmon made for the PermaFrostMC Server! :)",
-        authors = {"itsTyxD", ""}
+        authors = {"itsTyxD"}
 )
 public class FrostMMO {
 
@@ -73,6 +73,10 @@ public class FrostMMO {
 
     private void registerCommands() {
 
+        CommandSpec showInfo = CommandSpec.builder()
+                .permission("frostmmo.info")
+                .executor(new Info())
+                .build();
 
         CommandSpec toggleMessages = CommandSpec.builder()
                 .permission("frostmmo.toggle")
@@ -102,6 +106,7 @@ public class FrostMMO {
                 .child(showStats, "stats")
                 .child(hideStats, "hide", "hidestats")
                 .child(toggleMessages, "togglestats")
+                .child(showInfo, "info")
                 .build();
 
         game.getCommandManager().register(this, baseCommand,"frostmmo");

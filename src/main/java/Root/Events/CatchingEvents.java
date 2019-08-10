@@ -92,6 +92,13 @@ public class CatchingEvents {
             ));
         }
 
+        if (chance < percentChanceHA) {
+            pokemon.setAbilitySlot(2);
+            player.sendMessage(Text.of(TextColors.AQUA, "[FrostMMO] - ", TextColors.GRAY,
+                    "Wow! Your pokemon learned its hidden ability!"
+            ));
+        }
+
     }
 
 }
