@@ -1,11 +1,12 @@
 package Root.Objects;
 
 import Root.Manager.SQLManager;
+import org.spongepowered.api.Sponge;
+import org.spongepowered.api.entity.living.player.User;
+import org.spongepowered.api.service.user.UserStorageService;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class Storage extends SQLManager {
@@ -198,5 +199,31 @@ public class Storage extends SQLManager {
             e.printStackTrace();
         }
 
+    }
+    public static ArrayList<PlayerLevels> getPlayerRankings() {
+        try {
+            Connection conn = getConnection();
+            Statement stm;
+            stm = conn.createStatement();
+            String sql = "SELECT * FROM PLAYERDB";
+            ResultSet rst;
+            rst = stm.executeQuery(sql);
+            ArrayList<PlayerLevels> playerRankingArrayList = new ArrayList<>();
+            while (rst.next()) {
+                UserStorageService userStorageService = Sponge.getServiceManager().provide(UserStorageService.class).get();
+                User user = userStorageService.get(UUID.fromString(rst.getString("PLAYER"))).get();
+                // if (rst.getInt("ELOOU") > 1000) {
+                PlayerLevels playerRanking = new PlayerLevels(user,
+                        rst.getInt("BATTLEEXP"),
+                        rst.getInt("BREEDEXP"),
+                        rst.getInt("CATCHEXP"));
+                playerRankingArrayList.add(playerRanking);
+                //}
+            }
+            return playerRankingArrayList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

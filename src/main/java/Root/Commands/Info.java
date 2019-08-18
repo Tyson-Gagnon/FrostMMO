@@ -36,15 +36,15 @@ public class Info implements CommandExecutor {
         ));
 
         player.sendMessage(Text.of(TextColors.AQUA, "Breeding - Level ", playerLevels.getBreedlevel()));
-        player.sendMessage(Text.of(TextColors.GRAY, "> Reduces amount of steps it takes to hatch an egg by ", stepsRemoved, " steps!", playerLevels.getBreedlevel()));
+        player.sendMessage(Text.of(TextColors.GRAY, "> Reduces amount of steps it takes to hatch an egg by ", stepsRemoved, " steps!"));
 
         player.sendMessage(Text.of(TextColors.AQUA, "Battling - Level ", playerLevels.getKilllevel()));
         player.sendMessage(Text.of(TextColors.GRAY, "> Multiplies the amount of xp you get when defeating pokemon by ", (int) (xpMultiplier * 100), "%"));
         player.sendMessage(Text.of(TextColors.GRAY, "> 2% chance of getting double loot!"));
 
         player.sendMessage(Text.of(TextColors.AQUA, "Catching - Level ", playerLevels.getCathclevel()));
-        player.sendMessage(Text.of(TextColors.GRAY, "> ", percentChanceShiny, " chance pokemon turning shiny upon catch!"));
-        player.sendMessage(Text.of(TextColors.GRAY, "> ", percentChanceHA, " chance pokemon learning its HA upon catch!"));
+        player.sendMessage(Text.of(TextColors.GRAY, "> ", percentChanceShiny, " chance pokemon turning shiny after its caught!"));
+        player.sendMessage(Text.of(TextColors.GRAY, "> ", percentChanceHA, " chance pokemon learning its HA after its caught!"));
 
 
         return CommandResult.success();

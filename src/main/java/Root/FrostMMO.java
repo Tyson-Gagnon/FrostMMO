@@ -72,6 +72,11 @@ public class FrostMMO {
     }
 
     private void registerCommands() {
+        CommandSpec showLeaderbored = CommandSpec.builder()
+                .permission("frostmmo.leader")
+                .executor(new Leaderboard())
+                .arguments(new TypesCommandElemts(Text.of("stat")))
+                .build();
 
         CommandSpec showInfo = CommandSpec.builder()
                 .permission("frostmmo.info")
@@ -92,6 +97,7 @@ public class FrostMMO {
         CommandSpec showStats = CommandSpec.builder()
                 .permission("frostmmo.stats")
                 .executor(new Stats())
+                .arguments(GenericArguments.optional(GenericArguments.user(Text.of("target"))))
                 .build();
 
         CommandSpec hideStats = CommandSpec.builder()
@@ -107,6 +113,7 @@ public class FrostMMO {
                 .child(hideStats, "hide", "hidestats")
                 .child(toggleMessages, "togglestats")
                 .child(showInfo, "info")
+                .child(showLeaderbored,"leaderboard")
                 .build();
 
         game.getCommandManager().register(this, baseCommand,"frostmmo");
