@@ -212,18 +212,62 @@ public class Storage extends SQLManager {
             while (rst.next()) {
                 UserStorageService userStorageService = Sponge.getServiceManager().provide(UserStorageService.class).get();
                 User user = userStorageService.get(UUID.fromString(rst.getString("PLAYER"))).get();
-                // if (rst.getInt("ELOOU") > 1000) {
                 PlayerLevels playerRanking = new PlayerLevels(user,
                         rst.getInt("BATTLEEXP"),
                         rst.getInt("BREEDEXP"),
                         rst.getInt("CATCHEXP"));
                 playerRankingArrayList.add(playerRanking);
-                //}
             }
+            conn.close();
+            stm.close();
             return playerRankingArrayList;
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static int getPokeballExp(UUID player) {
+        int value = 0;
+
+        try {
+            Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM PLAYERDB WHERE PLAYER=?");
+            preparedStatement.setString(1, player.toString());
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next())
+                value = resultSet.getInt("POKEBALLEXP");
+
+            preparedStatement.close();
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return value;
+    }
+
+    public static void setPokeballXp(UUID player, int xp) {
+
+        try {
+
+            Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("MERGE INTO PLAYERDB (PLAYER,POKEBALLEXP) KEY (PLAYER) VALUES (?,?)");
+
+            preparedStatement.setString(1, player.toString());
+            preparedStatement.setInt(2, xp);
+
+
+            preparedStatement.execute();
+
+            preparedStatement.close();
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }

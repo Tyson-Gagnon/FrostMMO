@@ -34,10 +34,11 @@ public class Stats implements CommandExecutor {
         if (args.hasAny("target")) {
             User user = args.<User>getOne("target").get();
 
-            PlayerLevels playerLevels = new PlayerLevels(
+            PlayerLevels playerLevels = new PlayerLevels(user,
                     Storage.getBreedExp(user.getUniqueId()),
                     Storage.getCatchEXP(user.getUniqueId()),
-                    Storage.getBattleExp(user.getUniqueId()));
+                    Storage.getBattleExp(user.getUniqueId()),
+                    Storage.getPokeballExp(user.getUniqueId()));
 
             Scoreboard scoreboard = Scoreboard.builder().build();
             Objective objective = Sponge.getGame().getRegistry().createBuilder(Objective.Builder.class)
@@ -69,6 +70,13 @@ public class Stats implements CommandExecutor {
                         Storage.getBattleExp(user.getUniqueId()), "/", (500 * ((int) Math.pow(playerLevels.getKilllevel() + 1, 2)) - (500 * (playerLevels.getKilllevel() + 1))) + "   "
                 )).setScore(21);
             }
+            objective.getOrCreateScore(Text.of(TextColors.YELLOW, "Pball Making: ")).setScore(20);
+            objective.getOrCreateScore(Text.of(TextColors.GREEN, playerLevels.getKilllevel() + "       ")).setScore(19);
+            if (playerLevels.getPballLevel() != 100) {
+                objective.getOrCreateScore(Text.of(TextColors.WHITE, TextStyles.UNDERLINE,
+                        Storage.getPokeballExp(user.getUniqueId()), "/", (500 * ((int) Math.pow(playerLevels.getPballLevel() + 1, 2)) - (500 * (playerLevels.getPballLevel() + 1))) + "   "
+                )).setScore(18);
+            }
 
             scoreboard.addObjective(objective);
             scoreboard.updateDisplaySlot(objective, DisplaySlots.SIDEBAR);
@@ -83,7 +91,7 @@ public class Stats implements CommandExecutor {
 
     public static void updateScoreBoard(Player player) {
 
-        PlayerLevels playerLevels = new PlayerLevels(player, Storage.getBreedExp(player.getUniqueId()), Storage.getCatchEXP(player.getUniqueId()), Storage.getBattleExp(player.getUniqueId()));
+        PlayerLevels playerLevels = new PlayerLevels(player, Storage.getBreedExp(player.getUniqueId()), Storage.getCatchEXP(player.getUniqueId()), Storage.getBattleExp(player.getUniqueId()), Storage.getPokeballExp(player.getUniqueId()));
 
         Scoreboard scoreboard = Scoreboard.builder().build();
         Objective objective = Sponge.getGame().getRegistry().createBuilder(Objective.Builder.class)
@@ -114,6 +122,13 @@ public class Stats implements CommandExecutor {
             objective.getOrCreateScore(Text.of(TextColors.WHITE, TextStyles.UNDERLINE,
                     Storage.getBattleExp(player.getUniqueId()), "/", (500 * ((int) Math.pow(playerLevels.getKilllevel() + 1, 2)) - (500 * (playerLevels.getKilllevel() + 1))) + "   "
             )).setScore(21);
+        }
+        objective.getOrCreateScore(Text.of(TextColors.YELLOW, "Pball Making: ")).setScore(20);
+        objective.getOrCreateScore(Text.of(TextColors.GREEN, playerLevels.getPballLevel() + "   ")).setScore(19);
+        if (playerLevels.getPballLevel() != 100) {
+            objective.getOrCreateScore(Text.of(TextColors.WHITE, TextStyles.UNDERLINE,
+                    Storage.getPokeballExp(player.getUniqueId()), "/", (500 * ((int) Math.pow(playerLevels.getPballLevel() + 1, 2)) - (500 * (playerLevels.getPballLevel() + 1))) + "      "
+            )).setScore(18);
         }
 
         scoreboard.addObjective(objective);

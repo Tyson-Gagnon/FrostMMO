@@ -41,7 +41,7 @@ public class Leaderboard implements CommandExecutor {
         switch (stat.toLowerCase()) {
             case "breeding":
                 playerRankingList.sort(Comparator.comparingInt(PlayerLevels::getBreedlevel).reversed());
-                Objective obj = Sponge.getGame().getRegistry().createBuilder(Objective.Builder.class).criterion(Criteria.DUMMY).name("Rankings").displayName(Text.of(TextStyles.BOLD, TextColors.BLUE, "   FrostMMO Rankings   ")).build();
+                Objective obj = Sponge.getGame().getRegistry().createBuilder(Objective.Builder.class).criterion(Criteria.DUMMY).name("Rankings").displayName(Text.of(TextStyles.BOLD, TextColors.BLUE, "   Breeding Rankings   ")).build();
                 Scoreboard scoreboard = Scoreboard.builder().build();
                 obj.getOrCreateScore(Text.of(TextColors.DARK_GRAY, TextStyles.BOLD, "  ")).setScore(30);
                 obj.getOrCreateScore(Text.of(TextColors.DARK_GRAY, TextStyles.BOLD, " ")).setScore(1);
@@ -51,7 +51,7 @@ public class Leaderboard implements CommandExecutor {
                     if (i < playerRankingList.size()) {
                         obj.getOrCreateScore(Text.of(
                                 TextColors.YELLOW, "#" + (i + 1) + " ",
-                                TextColors.GOLD, playerRankingList.get(i).getPlayer().getName(),
+                                TextColors.GOLD, playerRankingList.get(i).getUser().getName(),
                                 TextColors.GRAY, ">>",
                                 TextColors.GOLD, playerRankingList.get(i).getBreedlevel()
                         )).setScore(f);
@@ -63,7 +63,7 @@ public class Leaderboard implements CommandExecutor {
                 break;
             case "battling":
                 playerRankingList.sort(Comparator.comparingInt(PlayerLevels::getKilllevel).reversed());
-                Objective objw = Sponge.getGame().getRegistry().createBuilder(Objective.Builder.class).criterion(Criteria.DUMMY).name("Rankings").displayName(Text.of(TextStyles.BOLD, TextColors.BLUE, "   FrostMMO Rankings   ")).build();
+                Objective objw = Sponge.getGame().getRegistry().createBuilder(Objective.Builder.class).criterion(Criteria.DUMMY).name("Rankings").displayName(Text.of(TextStyles.BOLD, TextColors.BLUE, "   Battling Rankings   ")).build();
                 Scoreboard scoreboardw = Scoreboard.builder().build();
                 objw.getOrCreateScore(Text.of(TextColors.DARK_GRAY, TextStyles.BOLD, "  ")).setScore(30);
                 objw.getOrCreateScore(Text.of(TextColors.DARK_GRAY, TextStyles.BOLD, " ")).setScore(1);
@@ -73,9 +73,9 @@ public class Leaderboard implements CommandExecutor {
                     if (i < playerRankingList.size()) {
                         objw.getOrCreateScore(Text.of(
                                 TextColors.YELLOW, "#" + (i + 1) + " ",
-                                TextColors.GOLD, playerRankingList.get(i).getPlayer().getName(),
+                                TextColors.GOLD, playerRankingList.get(i).getUser().getName(),
                                 TextColors.GRAY, ">>",
-                                TextColors.GOLD, playerRankingList.get(i).getBreedlevel()
+                                TextColors.GOLD, playerRankingList.get(i).getKilllevel()
                         )).setScore(fw);
                         fw--;
                     }
@@ -86,7 +86,7 @@ public class Leaderboard implements CommandExecutor {
                 break;
             case "catching":
                 playerRankingList.sort(Comparator.comparingInt(PlayerLevels::getCathclevel).reversed());
-                Objective obje = Sponge.getGame().getRegistry().createBuilder(Objective.Builder.class).criterion(Criteria.DUMMY).name("Rankings").displayName(Text.of(TextStyles.BOLD, TextColors.BLUE, "   FrostMMO Rankings   ")).build();
+                Objective obje = Sponge.getGame().getRegistry().createBuilder(Objective.Builder.class).criterion(Criteria.DUMMY).name("Rankings").displayName(Text.of(TextStyles.BOLD, TextColors.BLUE, "   Catching Rankings   ")).build();
                 Scoreboard scoreboarde = Scoreboard.builder().build();
                 obje.getOrCreateScore(Text.of(TextColors.DARK_GRAY, TextStyles.BOLD, "  ")).setScore(30);
                 obje.getOrCreateScore(Text.of(TextColors.DARK_GRAY, TextStyles.BOLD, " ")).setScore(1);
@@ -96,9 +96,9 @@ public class Leaderboard implements CommandExecutor {
                     if (i < playerRankingList.size()) {
                         obje.getOrCreateScore(Text.of(
                                 TextColors.YELLOW, "#" + (i + 1) + " ",
-                                TextColors.GOLD, playerRankingList.get(i).getPlayer().getName(),
+                                TextColors.GOLD, playerRankingList.get(i).getUser().getName(),
                                 TextColors.GRAY, ">>",
-                                TextColors.GOLD, playerRankingList.get(i).getBreedlevel()
+                                TextColors.GOLD, playerRankingList.get(i).getCathclevel()
                         )).setScore(fe);
                         fe--;
                     }

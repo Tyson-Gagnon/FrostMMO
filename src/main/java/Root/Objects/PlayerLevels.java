@@ -9,6 +9,9 @@ public class PlayerLevels {
 
     private User user;
 
+    public PlayerLevels(int breedExp, int catchEXP, int battleExp, int pokeballExp) {
+    }
+
     public Player getPlayer() {
         return player;
     }
@@ -25,7 +28,15 @@ public class PlayerLevels {
         return killlevel;
     }
 
-    private int breedlevel,cathclevel,killlevel;
+    public int getPballLevel() {
+        return pballLevel;
+    }
+
+    private int breedlevel, cathclevel, killlevel, pballLevel;
+
+    public User getUser() {
+        return user;
+    }
 
     public PlayerLevels(Player player, int breedexp, int catchexp, int killexp) {
         this.player = player;
@@ -44,6 +55,14 @@ public class PlayerLevels {
         this.breedlevel = expToLevel(breedexp);
         this.cathclevel = expToLevel(catchexp);
         this.killlevel = expToLevel(killexp);
+    }
+
+    public PlayerLevels(User user, int breedexp, int catchexp, int killexp, int pokeballExp) {
+        this.user = user;
+        this.breedlevel = expToLevel(breedexp);
+        this.cathclevel = expToLevel(catchexp);
+        this.killlevel = expToLevel(killexp);
+        this.pballLevel = expToLevel(pokeballExp);
     }
 
     private int expToLevel(int exp){

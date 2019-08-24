@@ -5,6 +5,7 @@ import Root.Commands.CommandElemets.TypesCommandElemts;
 import Root.Events.BreedingEvents;
 import Root.Events.CatchingEvents;
 import Root.Events.KillingEvents;
+import Root.Events.PokeballEvents;
 import Root.Manager.ConfigurationManager;
 import Root.Manager.SQLManager;
 import com.google.inject.Inject;
@@ -123,7 +124,8 @@ public class FrostMMO {
         Pixelmon.EVENT_BUS.register(new BreedingEvents());
         Pixelmon.EVENT_BUS.register(new CatchingEvents());
         Pixelmon.EVENT_BUS.register(new KillingEvents());
-
+        Pixelmon.EVENT_BUS.register(new PokeballEvents());
+        game.getEventManager().registerListeners(this, new PokeballEvents());
     }
 
     public static Path getDir(){return instance.path;}

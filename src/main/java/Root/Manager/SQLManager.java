@@ -32,6 +32,8 @@ public class SQLManager {
                     "`POKEMONCAUGHT` INT NOT NULL DEFAULT 0," +
                     "PRIMARY KEY (`PLAYER`))");
 
+            stmt.execute("ALTER TABLE `PLAYERDB` ADD IF NOT EXISTS POKEBALLEXP INT NOT NULL DEFAULT 0");
+
             stmt.close();
             connection.close();
 

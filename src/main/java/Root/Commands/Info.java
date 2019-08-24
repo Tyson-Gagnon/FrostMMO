@@ -24,12 +24,15 @@ public class Info implements CommandExecutor {
                 player,
                 Storage.getBreedExp(player.getUniqueId()),
                 Storage.getCatchEXP(player.getUniqueId()),
-                Storage.getBattleExp(player.getUniqueId()));
+                Storage.getBattleExp(player.getUniqueId()),
+                Storage.getPokeballExp(player.getUniqueId()));
 
         int stepsRemoved = ConfigurationManager.getConfNode("MultiplierValues", "Breeding", "steps-removed-per-level").getInt() * playerLevels.getBreedlevel();
         double xpMultiplier = ConfigurationManager.getConfNode("MultiplierValues", "Battling", "xp-multiplier-per-level").getDouble() * playerLevels.getKilllevel();
         double percentChanceShiny = (((ConfigurationManager.getConfNode("MultiplierValues", "Catching", "percent-to-shiny-at-max").getDouble() / 100)) * playerLevels.getCathclevel());
         double percentChanceHA = (((ConfigurationManager.getConfNode("MultiplierValues", "Catching", "percent-to-HA-at-max").getDouble() / 100)) * playerLevels.getCathclevel());
+        double doubleChance = (((ConfigurationManager.getConfNode("MultiplierValues", "Pball", "double-drop-at-max").getDouble() / 100)) * playerLevels.getPballLevel());
+        double tripleChance = (((ConfigurationManager.getConfNode("MultiplierValues", "Pball", "triple-drop-at-max").getDouble() / 100)) * playerLevels.getPballLevel());
 
         player.sendMessage(Text.of(TextColors.AQUA, "[FrostMMO] - ", TextColors.GRAY,
                 "Here are your current stats and what those stats offer based on your level in that stat!"
@@ -45,6 +48,10 @@ public class Info implements CommandExecutor {
         player.sendMessage(Text.of(TextColors.AQUA, "Catching - Level ", playerLevels.getCathclevel()));
         player.sendMessage(Text.of(TextColors.GRAY, "> ", percentChanceShiny, " chance pokemon turning shiny after its caught!"));
         player.sendMessage(Text.of(TextColors.GRAY, "> ", percentChanceHA, " chance pokemon learning its HA after its caught!"));
+
+        player.sendMessage(Text.of(TextColors.AQUA, "Pokeball Making - Level ", playerLevels.getPballLevel()));
+        player.sendMessage(Text.of(TextColors.GRAY, "> ", doubleChance, " chance to give double items when using an anvil!"));
+        player.sendMessage(Text.of(TextColors.GRAY, "> ", tripleChance, " chance to give triple items when using an anvil!"));
 
 
         return CommandResult.success();

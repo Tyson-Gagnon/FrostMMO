@@ -60,6 +60,22 @@ public class ConfigurationManager {
                 configurationLoader = HoconConfigurationLoader.builder().setPath(config).build();
                 configurationNode = configurationLoader.load();
             }
+
+
+            if (configurationNode.getNode("XPValues", "Pball", "xp-per-finished-anvil").isVirtual()) {
+                configurationNode.getNode("XPValues", "Pball", "xp-per-finished-anvil").setValue(150);
+            }
+            if (configurationNode.getNode("XPValues", "Pball", "xp-per-craft").isVirtual()) {
+                configurationNode.getNode("XPValues", "Pball", "xp-per-craft").setValue(150);
+            }
+            if (configurationNode.getNode("MultiplierValues", "Pball", "double-drop-at-max").isVirtual()) {
+                configurationNode.getNode("MultiplierValues", "Pball", "double-drop-at-max").setValue(75);
+            }
+            if (configurationNode.getNode("MultiplierValues", "Pball", "triple-drop-at-max").isVirtual()) {
+                configurationNode.getNode("MultiplierValues", "Pball", "triple-drop-at-max").setValue(25);
+            }
+            save();
+
         } catch (IOException e) {
             FrostMMO.getInstance().getLogger().error("Error loading up PokeTeams Configuration");
             e.printStackTrace();

@@ -26,7 +26,10 @@ public class TypesCommandElemts extends CommandElement {
     @Override
     public List<String> complete(CommandSource src, CommandArgs args, CommandContext context) {
         List<String> usage = new ArrayList<>();
-        usage.add("breeding"); usage.add("catching"); usage.add("battling");
+        usage.add("breeding");
+        usage.add("catching");
+        usage.add("battling");
+        usage.add("pball");
         return usage;
     }
 }

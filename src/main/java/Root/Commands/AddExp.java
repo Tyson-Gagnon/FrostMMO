@@ -46,6 +46,14 @@ public class AddExp implements CommandExecutor {
                             4950000 - Storage.getBattleExp(target.getUniqueId())));
                 }
                 break;
+            case "pball":
+                if (!(Storage.getPokeballExp(target.getUniqueId()) + xp > 4950000)) {
+                    Storage.setPokeballXp(target.getUniqueId(), Storage.getPokeballExp(target.getUniqueId()) + xp);
+                } else {
+                    src.sendMessage(Text.of(TextColors.RED, "Players cannot exceed a total of 495000 xp(lvl100)! The max you can give to the player is ",
+                            4950000 - Storage.getPokeballExp(target.getUniqueId())));
+                }
+                break;
 
             default:
                 src.sendMessage(Text.of("Stat not found! The available types are 'breeding''battling''catching'"));
