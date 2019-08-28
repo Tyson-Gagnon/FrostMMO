@@ -47,7 +47,9 @@ public class KillingEvents {
 
             for (EnumSpecies legendaryEnum : legendaryEnums) {
                 if (legendaryEnum.equals(Pokemon.getSpecies())) {
-                    xpGain = xpGain + ConfigurationManager.getConfNode("XPValues", "Battling", "legend-xp-bonus").getInt();
+                    if(!entityPixelmon.isBossPokemon()){
+                        xpGain = xpGain + ConfigurationManager.getConfNode("XPValues", "Battling", "legend-xp-bonus").getInt();
+                    }
                 }
             }
 

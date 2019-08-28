@@ -10,6 +10,7 @@ import com.pixelmonmod.pixelmon.api.events.BreedEvent;
 import com.pixelmonmod.pixelmon.api.events.EggHatchEvent;
 import com.pixelmonmod.pixelmon.api.pokemon.Pokemon;
 import com.pixelmonmod.pixelmon.config.PixelmonConfig;
+import com.pixelmonmod.pixelmon.entities.pixelmon.EntityPixelmon;
 import com.pixelmonmod.pixelmon.entities.pixelmon.stats.BaseStats;
 import info.pixelmon.repack.ninja.leaping.configurate.commented.CommentedConfigurationNode;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -76,6 +77,8 @@ public class BreedingEvents {
 
 
             Pokemon pokemon = e.pokemon;
+            EntityPixelmon entityPixelmon;
+
             Pokemon copyOfPokemon = Pixelmon.pokemonFactory.create(pokemon.getSpecies());
 
             int stepsToHatch = copyOfPokemon.getBaseStats().eggCycles * 255;
