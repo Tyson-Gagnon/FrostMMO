@@ -83,7 +83,7 @@ public class PokeballEvents {
     @Listener
     public void onCraftEvent(CraftItemEvent.Craft e, @Root Player player) {
 
-        if (e.getCrafted().createStack().getType().getId().contains("ball")) {
+        if (e.getCrafted().createStack().getType().getId().contains("ball") && !e.getCrafted().createStack().getType().getId().contains("disc")) {
             int xpToGainAnvil = ConfigurationManager.getConfNode("XPValues", "Pball", "xp-per-finished-anvil").getInt();
             PlayerLevels playerLevels = new PlayerLevels(
                     player,

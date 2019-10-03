@@ -58,7 +58,6 @@ public class FrostMMO {
         instance = this;
         ConfigurationManager.setup(path);
         SQLManager.load();
-
     }
 
     @Listener
@@ -129,8 +128,6 @@ public class FrostMMO {
     }
 
     public static Path getDir(){return instance.path;}
-
-
     public static org.slf4j.Logger getLogger() {
         return logger;
     }

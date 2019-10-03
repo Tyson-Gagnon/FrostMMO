@@ -213,13 +213,14 @@ public class Storage extends SQLManager {
                 UserStorageService userStorageService = Sponge.getServiceManager().provide(UserStorageService.class).get();
                 User user = userStorageService.get(UUID.fromString(rst.getString("PLAYER"))).get();
                 PlayerLevels playerRanking = new PlayerLevels(user,
-                        rst.getInt("BATTLEEXP"),
                         rst.getInt("BREEDEXP"),
-                        rst.getInt("CATCHEXP"));
+                        rst.getInt("CATCHEXP"),
+                        rst.getInt("BATTLEEXP"));
                 playerRankingArrayList.add(playerRanking);
             }
-            conn.close();
             stm.close();
+            conn.close();
+
             return playerRankingArrayList;
         } catch (SQLException e) {
             e.printStackTrace();

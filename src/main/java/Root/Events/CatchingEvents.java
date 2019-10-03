@@ -5,6 +5,7 @@ import Root.FrostMMO;
 import Root.Manager.ConfigurationManager;
 import Root.Objects.PlayerLevels;
 import Root.Objects.Storage;
+import com.pixelmonmod.pixelmon.Pixelmon;
 import com.pixelmonmod.pixelmon.api.events.CaptureEvent;
 import com.pixelmonmod.pixelmon.api.events.storage.StorageManagerLoadEvent;
 import com.pixelmonmod.pixelmon.api.pokemon.Pokemon;
@@ -92,6 +93,9 @@ public class CatchingEvents {
             ));
         }
 
+        rand = new Random();
+        chance = rand.nextFloat();
+
         if (chance < percentChanceHA) {
             pokemon.setAbilitySlot(2);
             player.sendMessage(Text.of(TextColors.AQUA, "[FrostMMO] - ", TextColors.GRAY,
@@ -100,5 +104,6 @@ public class CatchingEvents {
         }
 
     }
+
 
 }

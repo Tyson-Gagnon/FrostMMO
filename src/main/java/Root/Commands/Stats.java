@@ -71,7 +71,7 @@ public class Stats implements CommandExecutor {
                 )).setScore(21);
             }
             objective.getOrCreateScore(Text.of(TextColors.YELLOW, "Pball Making: ")).setScore(20);
-            objective.getOrCreateScore(Text.of(TextColors.GREEN, playerLevels.getKilllevel() + "       ")).setScore(19);
+            objective.getOrCreateScore(Text.of(TextColors.GREEN, playerLevels.getPballLevel() + "       ")).setScore(19);
             if (playerLevels.getPballLevel() != 100) {
                 objective.getOrCreateScore(Text.of(TextColors.WHITE, TextStyles.UNDERLINE,
                         Storage.getPokeballExp(user.getUniqueId()), "/", (500 * ((int) Math.pow(playerLevels.getPballLevel() + 1, 2)) - (500 * (playerLevels.getPballLevel() + 1))) + "   "
@@ -124,10 +124,10 @@ public class Stats implements CommandExecutor {
             )).setScore(21);
         }
         objective.getOrCreateScore(Text.of(TextColors.YELLOW, "Pball Making: ")).setScore(20);
-        objective.getOrCreateScore(Text.of(TextColors.GREEN, playerLevels.getPballLevel() + "   ")).setScore(19);
+        objective.getOrCreateScore(Text.of(TextColors.GREEN, playerLevels.getPballLevel() + "      ")).setScore(19);
         if (playerLevels.getPballLevel() != 100) {
             objective.getOrCreateScore(Text.of(TextColors.WHITE, TextStyles.UNDERLINE,
-                    Storage.getPokeballExp(player.getUniqueId()), "/", (500 * ((int) Math.pow(playerLevels.getPballLevel() + 1, 2)) - (500 * (playerLevels.getPballLevel() + 1))) + "      "
+                    Storage.getPokeballExp(player.getUniqueId()), "/", (500 * ((int) Math.pow(playerLevels.getPballLevel() + 1, 2)) - (500 * (playerLevels.getPballLevel() + 1))) + "           "
             )).setScore(18);
         }
 
