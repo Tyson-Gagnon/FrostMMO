@@ -46,12 +46,16 @@ public class PokeballEvents {
 
         if (playerLevels.getPballLevel() < 100) {
             Storage.setPokeballXp(e.player.getUniqueID(), Storage.getPokeballExp(e.player.getUniqueID()) + xpToGainAnvil);
+            PlayerLevels playerLevels2 = new PlayerLevels(
+                    player.getPlayer().get(),
+                    Storage.getBreedExp(player.getUniqueId()),
+                    Storage.getCatchEXP(player.getUniqueId()),
+                    Storage.getBattleExp(player.getUniqueId()));
 
-            player.sendMessage(Text.of(TextColors.AQUA, "[FrostMMO] - ", TextColors.GRAY,
-                    "You gained ", TextColors.YELLOW, xpToGainAnvil, TextColors.GRAY, " xp in the", TextColors.YELLOW, " PBall making ", TextColors.GRAY, "stat!"
-            ));
-            if (!FrostMMO.updateExemptions.contains(player.getUniqueId().toString())) {
-                Stats.updateScoreBoard(player);
+            if(playerLevels2.getPballLevel() > playerLevels.getPballLevel()){
+                player.sendMessage(Text.of(TextColors.AQUA, "[FrostMMO] - ", TextColors.GRAY,
+                        "You gained a level in the smithing stat. Yoo are now level " + playerLevels.getPballLevel()
+                ));
             }
         }
 
@@ -95,13 +99,16 @@ public class PokeballEvents {
             if (playerLevels.getPballLevel() < 100) {
                 xpToGainAnvil = xpToGainAnvil * e.getCrafted().getQuantity();
                 Storage.setPokeballXp(player.getUniqueId(), Storage.getPokeballExp(player.getUniqueId()) + xpToGainAnvil);
+                PlayerLevels playerLevels2 = new PlayerLevels(
+                        player.getPlayer().get(),
+                        Storage.getBreedExp(player.getUniqueId()),
+                        Storage.getCatchEXP(player.getUniqueId()),
+                        Storage.getBattleExp(player.getUniqueId()));
 
-
-                player.sendMessage(Text.of(TextColors.AQUA, "[FrostMMO] - ", TextColors.GRAY,
-                        "You gained ", TextColors.YELLOW, xpToGainAnvil, TextColors.GRAY, " xp in the", TextColors.YELLOW, " PBall making ", TextColors.GRAY, "stat!"
-                ));
-                if (!FrostMMO.updateExemptions.contains(player.getUniqueId().toString())) {
-                    Stats.updateScoreBoard(player);
+                if(playerLevels2.getPballLevel() > playerLevels.getPballLevel()){
+                    player.sendMessage(Text.of(TextColors.AQUA, "[FrostMMO] - ", TextColors.GRAY,
+                            "You gained a level in the smithing stat. Yoo are now level " + playerLevels.getPballLevel()
+                    ));
                 }
             }
 

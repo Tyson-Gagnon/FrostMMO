@@ -72,21 +72,6 @@ public class FrostMMO {
     }
 
     private void registerCommands() {
-        CommandSpec showLeaderbored = CommandSpec.builder()
-                .permission("frostmmo.leader")
-                .executor(new Leaderboard())
-                .arguments(new TypesCommandElemts(Text.of("stat")))
-                .build();
-
-        CommandSpec showInfo = CommandSpec.builder()
-                .permission("frostmmo.info")
-                .executor(new Info())
-                .build();
-
-        CommandSpec toggleMessages = CommandSpec.builder()
-                .permission("frostmmo.toggle")
-                .executor(new ToggleUpdates())
-                .build();
 
         CommandSpec addExp = CommandSpec.builder()
                 .permission("frostmmo.addExp")
@@ -100,23 +85,15 @@ public class FrostMMO {
                 .arguments(GenericArguments.optional(GenericArguments.user(Text.of("target"))))
                 .build();
 
-        CommandSpec hideStats = CommandSpec.builder()
-                .permission("frostmmo.stats")
-                .executor(new HideStats())
-                .build();
 
         CommandSpec baseCommand = CommandSpec.builder()
                 .permission("frostmmo.base")
                 .executor(new Base())
                 .child(addExp, "addxp")
                 .child(showStats, "stats")
-                .child(hideStats, "hide", "hidestats")
-                .child(toggleMessages, "togglestats")
-                .child(showInfo, "info")
-                .child(showLeaderbored,"leaderboard")
                 .build();
 
-        game.getCommandManager().register(this, baseCommand,"frostmmo");
+        game.getCommandManager().register(this, baseCommand,"mmo");
     }
 
     private void registerListeners() {

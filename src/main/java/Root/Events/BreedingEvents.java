@@ -49,12 +49,19 @@ public class BreedingEvents {
 
             if (user.getPlayer().isPresent()) {
                 Player player = user.getPlayer().get();
-                player.sendMessage(Text.of(TextColors.AQUA, "[FrostMMO] - ", TextColors.GRAY,
-                        "You gained ", TextColors.YELLOW, xp, TextColors.GRAY, " xp in the", TextColors.YELLOW, " breeding ", TextColors.GRAY, "stat!"
-                ));
-                if (!FrostMMO.updateExemptions.contains(player.getUniqueId().toString())) {
-                    Stats.updateScoreBoard(player);
+
+                PlayerLevels playerLevels2 = new PlayerLevels(
+                        user.getPlayer().get(),
+                        Storage.getBreedExp(user.getUniqueId()),
+                        Storage.getCatchEXP(user.getUniqueId()),
+                        Storage.getBattleExp(user.getUniqueId()));
+
+                if(playerLevels2.getBreedlevel() > breedLevel){
+                    player.sendMessage(Text.of(TextColors.AQUA, "[FrostMMO] - ", TextColors.GRAY,
+                            "You gained a level in the breeding stat. You are now level " + playerLevels.getBreedlevel()
+                    ));
                 }
+
             }
         }
     }
@@ -89,12 +96,16 @@ public class BreedingEvents {
 
             Storage.setBreedXp(player.getUniqueId(), Storage.getBreedExp(player.getUniqueId()) + xp);
 
-            player.sendMessage(Text.of(TextColors.AQUA, "[FrostMMO] - ", TextColors.GRAY,
-                    "You gained ", TextColors.YELLOW, xp, TextColors.GRAY, " xp in the", TextColors.YELLOW, " breeding ", TextColors.GRAY, "stat!"
-            ));
+            PlayerLevels playerLevels2 = new PlayerLevels(
+                    player,
+                    Storage.getBreedExp(player.getUniqueId()),
+                    Storage.getCatchEXP(player.getUniqueId()),
+                    Storage.getBattleExp(player.getUniqueId()));
 
-            if (!FrostMMO.updateExemptions.contains(player.getUniqueId().toString())) {
-                Stats.updateScoreBoard(player);
+            if(playerLevels2.getBreedlevel() > playerLevels.getBreedlevel()){
+                player.sendMessage(Text.of(TextColors.AQUA, "[FrostMMO] - ", TextColors.GRAY,
+                        "You gained a level in the breeding stat. You are now level " + playerLevels.getBreedlevel()
+                ));
             }
         }
     }

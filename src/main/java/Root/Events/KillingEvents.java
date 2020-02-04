@@ -55,11 +55,16 @@ public class KillingEvents {
 
             Storage.setBattleXp(player.getUniqueId(), Storage.getBattleExp(player.getUniqueId()) + xpGain);
 
-            player.sendMessage(Text.of(TextColors.AQUA, "[FrostMMO] - ", TextColors.GRAY,
-                    "You gained ", TextColors.YELLOW, xpGain, TextColors.GRAY, " xp in the", TextColors.YELLOW, " battling ", TextColors.GRAY, "stat!"
-            ));
-            if (!FrostMMO.updateExemptions.contains(player.getUniqueId().toString())) {
-                Stats.updateScoreBoard(player);
+            PlayerLevels playerLevels2 = new PlayerLevels(
+                    player.getPlayer().get(),
+                    Storage.getBreedExp(player.getUniqueId()),
+                    Storage.getCatchEXP(player.getUniqueId()),
+                    Storage.getBattleExp(player.getUniqueId()));
+
+            if(playerLevels2.getKilllevel() > playerLevels.getKilllevel()){
+                player.sendMessage(Text.of(TextColors.AQUA, "[FrostMMO] - ", TextColors.GRAY,
+                        "You gained a level in the battling stat. You are now level " + playerLevels.getKilllevel()
+                ));
             }
         }
     }

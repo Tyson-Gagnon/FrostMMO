@@ -57,11 +57,16 @@ public class CatchingEvents {
             }
 
             Storage.setCatchingXp(player.getUniqueId(), Storage.getCatchEXP(player.getUniqueId()) + xpToGive);
-            player.sendMessage(Text.of(TextColors.AQUA, "[FrostMMO] - ", TextColors.GRAY,
-                    "You gained ", TextColors.YELLOW, xpToGive, TextColors.GRAY, " xp in the", TextColors.YELLOW, " catching ", TextColors.GRAY, "stat!"
-            ));
-            if (!FrostMMO.updateExemptions.contains(player.getUniqueId().toString())) {
-                Stats.updateScoreBoard(player);
+            PlayerLevels playerLevels2 = new PlayerLevels(
+                    player.getPlayer().get(),
+                    Storage.getBreedExp(player.getUniqueId()),
+                    Storage.getCatchEXP(player.getUniqueId()),
+                    Storage.getBattleExp(player.getUniqueId()));
+
+            if(playerLevels2.getCathclevel() > playerLevels.getCathclevel()){
+                player.sendMessage(Text.of(TextColors.AQUA, "[FrostMMO] - ", TextColors.GRAY,
+                        "You gained a level in the catching stat. You are now level " + playerLevels.getCathclevel()
+                ));
             }
         }
     }
